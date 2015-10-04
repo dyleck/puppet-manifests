@@ -18,7 +18,7 @@ node 'node1.dylux.lab' {
   } ->
   rvm_gem {
     'ruby-2.2.1@rails-tutor/rails':
-      ensure => '4.2.4',
+      ensure => '4.0',
   }
 
   user {
@@ -53,12 +53,21 @@ node 'node1.dylux.lab' {
       require => [File['/home/rails'],User['rails'],],
   }
 
-  exec {
-    '/bin/su -l rails /bin/bash -c "rvm use ruby-2.2.1@rails-tutor --default"':
-      require => [User['rails'], Rvm_gemset['ruby-2.2.1@rails-tutor'],],
-  } 
   package {
     'git':
+      ensure => present,
+  }
+  package {
+    'epel-release':
+      ensure => present,
+  }
+  package {
+    'nodejs':
+      ensure => present,
+      require => Package['epel-release'],
+  }
+  package {
+    'wget':
       ensure => present,
   }
 }
