@@ -57,6 +57,9 @@ node 'node1.dylux.lab' {
     '/bin/su -l rails /bin/bash -c "rvm use ruby-2.2.1@rails-tutor --default"':
       require => [User['rails'], Rvm_gemset['ruby-2.2.1@rails-tutor'],],
   } 
-
+  package {
+    'git':
+      ensure => present,
+  }
 }
 
