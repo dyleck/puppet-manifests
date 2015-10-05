@@ -54,20 +54,12 @@ node 'node1.dylux.lab' {
   }
 
   package {
-    'git':
-      ensure => present,
-  }
-  package {
-    'epel-release':
-      ensure => present,
-  }
-  package {
     'nodejs':
       ensure => present,
       require => Package['epel-release'],
   }
   package {
-    'wget':
+    ['wget', 'man', 'git', 'epel-release']:
       ensure => present,
   }
 }
